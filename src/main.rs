@@ -78,9 +78,15 @@ fn generate_random_number() -> i64 {
 
 // if you want to pass env variables via command
 // fn init_tracer() -> Result<sdktrace::Tracer, TraceError> {
+//     let signoz_access_token = std::env::var("SIGNOZ_ACCESS_TOKEN").expect("SIGNOZ_ACCESS_TOKEN not set");
+//     let mut metadata = MetadataMap::new();
+//     metadata.insert(
+//         "signoz-access-token",
+//         MetadataValue::from_str(&signoz_access_token).unwrap(),
+//     );
 //     opentelemetry_otlp::new_pipeline()
 //         .tracing()
-//         .with_exporter(opentelemetry_otlp::new_exporter().tonic().with_env())
+//         .with_exporter(opentelemetry_otlp::new_exporter().tonic().with_metadata(metadata).with_env())
 //         .with_trace_config(
 //             sdktrace::config().with_resource(Resource::default()),
 //         )
