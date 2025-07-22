@@ -52,21 +52,6 @@ fn init_tracer() {
     global::set_tracer_provider(tracer_provider);
 }
 
-// A Meter Provider is a factory for Meters
-// A Meter creates metric instruments, capturing measurements about a service at runtime.
-fn init_meter_provider() -> Result<()> {
-    let meter_provider = opentelemetry_otlp::new_pipeline()
-        .metrics(opentelemetry_sdk::runtime::Tokio)
-        .with_exporter(opentelemetry_otlp::new_exporter().tonic())
-        .with_resource(get_resource())
-        .with_delta_temporality()
-        .build()
-        .with_context(|| "creating meter provider")?;
-
-    global::set_meter_provider(meter_provider);
-
-    Ok(())
-}
 
 // A Logger Provider is a factory for Loggers
 // The init_logger_provider function initialises a Logger Provider
